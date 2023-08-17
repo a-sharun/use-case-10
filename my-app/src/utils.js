@@ -5,7 +5,7 @@
  * @param {number} maxLength - The allowed maximum length for the string.
  * @return {boolean} True if the string is valid, false otherwise.
  */
-export function validateString(input, maxLength) {
+export function validateString(input, maxLength = 5) {
   // 1. ^ and $: Ensure that the regex checks the entire string from start to end.
   // 2. (?=.*[A-Z]): A positive lookahead to ensure at least one uppercase letter is present.
   // 3. (?=.*[a-z]): A positive lookahead to ensure at least one lowercase letter is present.

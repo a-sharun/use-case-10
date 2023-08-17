@@ -1,0 +1,101 @@
+**Developer**: Provide me with a GitHub project description for my application that uses regular expression to validate user input.
+These are the rules to pass validation:
+At least one uppercase letter: (?=.*[A-Z])
+At least one lowercase letter: (?=.*[a-z])
+At least one digit: (?=.*[0-9])
+At least one special character: (?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_{|}~])`
+No whitespace characters: (?!.*\s)
+
+**GPT-4**: Regex Input Validator
+
+Description
+
+This repository contains an application that leverages the power of regular expressions (regex) to validate user inputs, ensuring security, reliability, and conformity to specific criteria.
+
+Validation Criteria:
+1. At least one uppercase letter.
+2. At least one lowercase letter.
+3. At least one digit.
+4. At least one special character.
+5. No whitespace characters.
+
+Regex Pattern
+
+The combined regular expression pattern for the above criteria is:
+
+```regex
+^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_{|}~])(?!.*\s).+$
+```
+
+Breakdown:
+
+- `(?=.*[A-Z])`: Asserts that at least one uppercase letter is present.
+- `(?=.*[a-z])`: Asserts that at least one lowercase letter is present.
+- `(?=.*[0-9])`: Asserts that at least one digit is present.
+- `(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_{|}~])`: Asserts that at least one special character is present.
+- `(?!.*\s)`: Asserts that no whitespace characters are present.
+
+Usage
+
+To utilize this application, input your string and the application will verify if it matches the defined criteria. If it passes, it means the input adheres to all the validation rules. If it fails, the user will need to modify their input to match the requirements.
+
+Contribution
+
+Contributions to improve the functionality or expand upon the existing set of rules are always welcome. Please ensure that any changes maintain the core goal of input validation while potentially adding new validation rules or enhancing user experience.
+
+License
+
+This project is open-source and available under the [MIT License](LICENSE.md).
+
+We encourage users to regularly check for updates, as enhancements and security patches will be applied as needed. Ensure your data is safe and conforms to best practices by always validating user inputs. Happy coding!
+
+---
+
+**Developer**: export function validateString(input, maxLength = 5) {
+  // 1. ^ and $: Ensure that the regex checks the entire string from start to end.
+  // 2. (?=.*[A-Z]): A positive lookahead to ensure at least one uppercase letter is present.
+  // 3. (?=.*[a-z]): A positive lookahead to ensure at least one lowercase letter is present.
+  // 4. (?=.*[0-9]): A positive lookahead to ensure at least one digit is present.
+  // 5. (?=.*[!"#$%&'()*+,-./:;<=>?@\\[\\]^_`{|}~]):
+  // A positive lookahead to ensure at least one of the special characters is present.
+  // 6. (?!.*\\s): A negative lookahead to ensure no whitespace characters (spaces, tabs, newlines, etc.) are present.
+  // 7. .{1,${maxLength}}: Ensures that the total length of the string is between 1 and maxLength (inclusive).
+  const regex = new RegExp(
+    `^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!"#$%&'()*+,-./:;<=>?@\\[\\]^_{|}~])(?!.*\\s).{1,${maxLength}}$`
+  );
+  return regex.test(input);
+}
+Provide me with Regex implementation description for function above so I can use it as documentation in project Readme file
+
+**GPT-4**: Certainly! Here's a description for the `validateString` function that you can include in your project's README file:
+
+---
+
+`validateString` Function Documentation
+
+The `validateString` function provides robust validation for a given input string based on a specific set of criteria. By utilizing regular expressions, this function ensures that the input not only adheres to the defined criteria but also allows users to specify a maximum length for the string.
+
+Validation Criteria:
+
+1. **Uppercase Letter**: At least one uppercase letter must be present.
+2. **Lowercase Letter**: At least one lowercase letter must be present.
+3. **Digit**: At least one numeric digit must be present.
+4. **Special Characters**: At least one special character (e.g., !"#$%&'()*+,-./:;<=>?@[\]^_{|}~) must be present.
+5. **No Whitespaces**: The string should not contain any whitespace characters, including spaces, tabs, newlines, etc.
+6. **Length Constraint**: The input string's length should be between 1 and a specified `maxLength`, inclusive. By default, `maxLength` is set to 5.
+
+Implementation Details:
+
+- The function makes use of **positive lookaheads** (`?=`) for the criteria that must be met and a **negative lookahead** (`?!`) to ensure unwanted patterns (like whitespaces) are not present in the string.
+  
+- To validate the string's length, a range quantifier (`.{1,${maxLength}}`) is used which checks that the total length of the string is between 1 and `maxLength`, inclusive.
+
+- The anchors `^` and `$` at the beginning and end of the regex pattern ensure that the entire input string is checked against the criteria from start to finish.
+
+Usage:
+
+```javascript
+validateString("Aa1!", 10); // Returns true (given the string meets the criteria and is less than or equal to 10 characters)
+```
+
+This function plays a pivotal role in ensuring that user inputs conform to a certain standard, adding an extra layer of validation and security to your application.

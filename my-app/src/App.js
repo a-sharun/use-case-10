@@ -1,5 +1,7 @@
+import Form from "./components/Form";
+
 function App() {
-  return <h1>use-case-10</h1>;
+  return <Form />;
 }
 
 export default App;
